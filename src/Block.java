@@ -11,13 +11,18 @@ public class Block {
     String data;
     String previousHash;
     String hash;
+    int nonce;
+
+    String hashRequirements;
 
     public Block(int index, String data, String previousHash) {
         this.index = index;
-        this.date = new Date();
         this.data = data;
+        this.date = new Date();
         this.previousHash = previousHash;
-        this.hash = getHash(data.getBytes(),"SHA-256");
+        this.nonce=0;
+        hashRequirements = index+data+date+previousHash+nonce;
+        this.hash = getHash(hashRequirements.getBytes(),"SHA-256");
     }
 
     public static String getHash(byte[] inputBytes, String algorithm){
@@ -31,6 +36,14 @@ public class Block {
             System.out.println("error "+ e);
         }
         return hashValue;
+    }
+
+    public void mine(String difficulty){
+        while(!this.hash.startsWith(difficulty)){
+            this.nonce++;
+            hashRequirements = index+data+date+previousHash+nonce;
+            this.hash=getHash(hashRequirements.getBytes(),"SHA-256");
+        }
     }
 }
 

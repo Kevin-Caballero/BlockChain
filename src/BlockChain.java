@@ -2,9 +2,11 @@ import java.util.ArrayList;
 
 public class BlockChain {
     public ArrayList<Block> chain;
+    String difficulty;
 
-    public BlockChain(String genesis) {
+    public BlockChain(String genesis,String difficulty) {
         chain=new ArrayList<>();
+        this.difficulty=difficulty;
         chain.add(createFirstBlock(genesis));
     }
 
@@ -21,6 +23,8 @@ public class BlockChain {
     public void addBlock(String data){
         Block previousBlock=getLastBlock();
         Block block=new Block(previousBlock.index+1,data,previousBlock.hash);
+        block.mine(difficulty);
+        System.out.println("MINADO!!! "+block.hash+" con nonce="+block.nonce);
         chain.add(block);
     }
 
