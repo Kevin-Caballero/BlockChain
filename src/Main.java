@@ -1,10 +1,21 @@
 public class Main {
     public static void main(String[] args){
 
-        BlockChain kvnCoin=new BlockChain("GENESIS","000000");
-        kvnCoin.addBlock("primer bloque");
-        kvnCoin.addBlock("segundo bloque");
+        BlockChain kvnCoin=new BlockChain("GENESIS","0");
 
+        for (int i = 0; i < 7; i++) {
+            String[] dif= {"0","00","000","0000","00000","000000","0000000"};
+            //Assign to each new block a new difficulty
+            kvnCoin.setDifficulty(dif[i]);
+
+            //data could be a contrat, a bill, etc.
+            String data= "Bloque"+i;
+
+            //mining block
+            kvnCoin.addBlock(data);
+        }
+
+        //show all chain blocks info
         for (int i = 0; i < kvnCoin.getSize(); i++) {
             System.out.println("Index: "+kvnCoin.getItem(i).index);
             System.out.println("Date: "+kvnCoin.getItem(i).date);

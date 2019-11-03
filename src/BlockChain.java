@@ -7,6 +7,8 @@ public class BlockChain {
     public BlockChain(String genesis,String difficulty) {
         chain=new ArrayList<>();
         this.difficulty=difficulty;
+
+        //the first block of the blockchain is commonly named genesis and it is made when blockchain begins
         chain.add(createFirstBlock(genesis));
     }
 
@@ -24,13 +26,15 @@ public class BlockChain {
         Block previousBlock=getLastBlock();
         Block block=new Block(previousBlock.index+1,data,previousBlock.hash);
         block.mine(difficulty);
-        System.out.println("MINADO!!! "+block.hash+" con nonce="+block.nonce);
+        System.out.println("MINADO Bloque"+block.index+"!!! "+block.hash+" con nonce="+block.nonce);
         chain.add(block);
     }
 
     public int getSize(){
         return chain.size();
     }
+
+    public void setDifficulty(String difficulty) { this.difficulty = difficulty;}
 
     public Block getItem(int pos){
         return chain.get(pos);

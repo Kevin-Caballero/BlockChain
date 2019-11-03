@@ -38,6 +38,7 @@ public class Block {
         return hashValue;
     }
 
+    //How the hash is obtained from a lot of datas we modify the nonce and therefore the hash (until the hash starts by "difficulty") to simulate a difficulty
     public void mine(String difficulty){
         while(!this.hash.startsWith(difficulty)){
             this.nonce++;
