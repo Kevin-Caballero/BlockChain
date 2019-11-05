@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class BlockChain {
-    public ArrayList<Block> chain;
+     ArrayList<Block> chain;
     String difficulty;
 
     public BlockChain(String genesis,String difficulty) {
